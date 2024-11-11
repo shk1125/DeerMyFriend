@@ -108,7 +108,7 @@ public class MainMenuManager : MonoBehaviour //메인 메뉴 매니저 클래스
 
 
 	private string playerDataLocation; //플레이어 데이터 위치 변수
-	private PlayerData playerData; //플레이어 데이터 struct
+	private PlayerData playerData; //플레이어 데이터 클래스
 
 	private Dictionary<string, StageData> stageDataDictionary; //스테이지 데이터 딕셔너리
 	private SkinData[] skinDataArray; //스킨 데이터 배열
@@ -193,7 +193,8 @@ howToPlayText_Mobile.SetActive(true); //모바일의 경우 모바일용 플레이 방법 오브�
 
 	private void GenerateSelectStage() //스테이지 선택 패널 생성 메소드
 	{
-		if (playerData.stageScoreList.Count < stageDataDictionary.Count) //플레이어 데이터에 있는 스테이지 점수 목록 개수가 부족할 경우 : 스테이지가 업데이트로 추가되어도 플레이어의 json에는 영향이 없기 때문
+		if (playerData.stageScoreList.Count < stageDataDictionary.Count) //플레이어 데이터에 있는 스테이지 점수 목록 개수가 부족할 경우
+																		 //: 스테이지가 업데이트로 추가되어도 플레이어의 json에는 영향이 없기 때문
 		{
 			for (int i = 0; i < stageDataDictionary.Count - playerData.stageScoreList.Count; i++)
 			{
@@ -353,8 +354,6 @@ howToPlayText_Mobile.SetActive(true); //모바일의 경우 모바일용 플레이 방법 오브�
 				buySkinButton.interactable = true; //구매 버튼 활성화
 			}
 		}
-
-
 	}
 
 	public void BuyOrEquipSkin() //스킨 구매 혹은 장비 메소드
