@@ -362,9 +362,11 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 		playerRigidbody2D = playerTransform.GetComponent<Rigidbody2D>(); //플레이어 rigidbody 컴포넌트 저장
 		playerController = playerTransform.GetComponent<PlayerController>(); //플레이어 컨트롤러 스크립트 저장
 
-		playerSpriteLibrary.spriteLibraryAsset = Resources.Load<SpriteLibraryAsset>($"Player/PlayerSpriteLibraryAsset{DataHolder.currentSkinNum}"); //DataHolder의 현재 스킨 번호로 스프라이트 라이브러리 변경
+		playerSpriteLibrary.spriteLibraryAsset = Resources.Load<SpriteLibraryAsset>($"Player/PlayerSpriteLibraryAsset{DataHolder.currentSkinNum}"); //DataHolder의 현재 스킨 번호로
+																																					//스프라이트 라이브러리 변경
 
-		joystickController.SetPlayerController(playerController); //조이스틱 컨트롤러 스크립트에 플레이어 등록 : 모바일이 아닐 경우 작동할 필요가 없지만 에디터에서의 확인을 위해 놔둔 상태. 전처리기로 분리 가능
+		joystickController.SetPlayerController(playerController); //조이스틱 컨트롤러 스크립트에 플레이어 등록 :
+																  //모바일이 아닐 경우 작동할 필요가 없지만 에디터에서의 확인을 위해 놔둔 상태. 전처리기로 분리 가능
 	}
 
 

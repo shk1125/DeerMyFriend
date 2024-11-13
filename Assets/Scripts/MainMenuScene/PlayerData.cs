@@ -60,7 +60,8 @@ public class PlayerData //플레이어 데이터 클래스
 
 	#endregion
 
-    public void AddStageScoreList() //스테이지 점수 리스트 추가 메소드 : 업데이트로 스테이지가 추가되어도 플레이어 데이터에는 영향이 없기 때문에 점수 리스트에 0점을 추가하는 용도
+    public void AddStageScoreList() //스테이지 점수 리스트 추가 메소드 : 업데이트로 스테이지가 추가되어도 플레이어 데이터에는 영향이 없기 때문에
+                                    //점수 리스트에 0점을 추가하는 용도
     {
         stageScoreList.Add(0); //스테이지 점수 리스트 추가
     }

@@ -7036,7 +7036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD558\uB294\uBC95"
+  m_text: "\uD558\uB294 \uBC95"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 00abc01494b825f448df21204b4fe137, type: 2}
   m_sharedMaterial: {fileID: -4537488496880227586, guid: 00abc01494b825f448df21204b4fe137, type: 2}
@@ -7063,7 +7063,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.95
+  m_fontSize: 45.8
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
