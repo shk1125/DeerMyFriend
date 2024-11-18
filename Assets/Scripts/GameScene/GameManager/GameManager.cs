@@ -136,7 +136,10 @@ public class GameManager : MonoBehaviour //게임매니저 클래스
 #if UNITY_ANDROID
 mobilePanel.SetActive(true); //모바일 패널 활성화
 SetDeathWallPosition(); //모바일 해상도 대응 DeathWall position 변경
+#else
+Screen.SetResolution(1920, 1080, true); //PC에서 해상도 Full HD로 고정
 #endif
+
 
 		GenerateBackground(); //배경화면 생성 메소드 호출
 		GenerateStage(); //스테이지 생성 메소드 호출

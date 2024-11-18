@@ -137,6 +137,11 @@ public class MainMenuManager : MonoBehaviour //메인 메뉴 매니저 클래스
 			dataFolder.Create(); //데이터 폴더 생성
 		}
 		playerDataLocation = Application.persistentDataPath + "/Data/playerData.json"; //플레이어 데이터 위치 저장
+
+#if !UNITY_ANDROID
+		Screen.SetResolution(1920, 1080, true); //PC에서 해상도 Full HD로 고정
+#endif
+
 		LoadData(); //데이터 불러오기
 	}
 
