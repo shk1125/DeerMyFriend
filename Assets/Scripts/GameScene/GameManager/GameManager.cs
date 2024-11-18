@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.U2D.Animation;
@@ -77,10 +78,11 @@ public class GameManager : MonoBehaviour //게임매니저 클래스
 
 	#endregion
 
-	#region DeathWall Object
-	[Header("DeathWall Object")]
+	#region DeathWall Objects and Variables
+	[Header("DeathWall Objects and Variables")]
 	public GameObject deathWall3; //DeathWall 3번 : 인스펙터에서 등록. DeathWall 3번은 위쪽(y축 기준)에 있는 DeathWall인데 카운트다운 동안 플레이어 오브젝트가 아래로 떨어지는 연출이 있기 때문에 비활성화 상태로 대기하다 카운트다운이 끝나면 다시 활성화됨
 
+	public Transform[] deathWallTransformArray; //DeathWall Transform 배열
 	#endregion
 
 	#region Background Objects and Variables
@@ -133,6 +135,7 @@ public class GameManager : MonoBehaviour //게임매니저 클래스
 
 #if UNITY_ANDROID
 mobilePanel.SetActive(true); //모바일 패널 활성화
+SetDeathWallPosition(); //모바일 해상도 대응 DeathWall position 변경
 #endif
 
 		GenerateBackground(); //배경화면 생성 메소드 호출
@@ -336,7 +339,11 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 		DataHolder.playerData.AddUnlockedStageCount(); //DataHolder에 다음 스테이지를 접근 가능으로 변경
 		DataHolder.playerData.SetStageScore(DataHolder.stageNum, score); //DataHolder에 현재 스테이지 점수를 저장
 		DataHolder.playerData.AddMoney(score / 10); //DataHolder에 스테이지 점수를 10으로 나눈 값을 가진 돈으로 추가
-		File.WriteAllText(Application.persistentDataPath + "/Data/playerData.json", JsonMapper.ToJson(DataHolder.playerData)); //json으로 저장
+		File.WriteAllText(Application.persistentDataPath + "/Data/playerData.json", JsonMapper.ToJson(DataHolder.playerData));
+		//json으로 저장
+#if UNITY_ANDROID
+mobilePanel.SetActive(false); //모바일 패널 비활성화
+#endif
 	}
 
 	private void GameFinished(AudioClip audioClip) //게임 종료(클리어, 게임 오버) 오디오 클립 재생 메소드
@@ -349,7 +356,20 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 
 	private void GenerateBackground() //배경 화면 생성 메소드
 	{
-		backgroundRenderer.material = Resources.Load<Material>($"Stage/Background/BackgroundMaterial{DataHolder.stageNum}"); //DataHolder의 현재 스테이지 배경 화면으로 material 변경
+		backgroundRenderer.material = Resources.Load<Material>($"Stage/Background/BackgroundMaterial{DataHolder.stageNum}"); 
+		//DataHolder의 현재 스테이지 배경 화면으로 material 변경
+	}
+
+	private void SetDeathWallPosition() //모바일 해상도 대응 DeathWall position 변경 메소드
+	{
+		float systemHeight = Display.main.systemHeight; //사용 기기 Height 저장
+		float systemWidth = Display.main.systemWidth; //사용 기기 Width 저장
+
+		for(int i = 0; i < deathWallTransformArray.Length; i++)
+		{
+			deathWallTransformArray[i].transform.position = new Vector3((systemWidth * deathWallTransformArray[i].transform.position.x) / 1920f,
+																		(systemHeight * deathWallTransformArray[i].transform.position.y) / 1080f, 0); //비례식으로 DeathWall Position 조절
+		}
 	}
 
 	#endregion

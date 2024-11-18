@@ -5590,6 +5590,14 @@ MonoBehaviour:
   - {fileID: 5736974405009109696, guid: af897e8abcc72c749beac1bda3aaa3aa, type: 3}
   enemyBulletPoolingController: {fileID: 465583550}
   deathWall3: {fileID: 650385731}
+  deathWallTransformArray:
+  - {fileID: 1450166783}
+  - {fileID: 151663696}
+  - {fileID: 650385732}
+  - {fileID: 617512655}
+  - {fileID: 957335491}
+  - {fileID: 1228279827}
+  - {fileID: 1743852680}
   backgroundRenderer: {fileID: 1520271272}
   backgroundSpeed: 0
   backgroundMusicAudioSource: {fileID: 1803830676}
