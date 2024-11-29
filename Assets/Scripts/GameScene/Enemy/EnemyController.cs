@@ -93,7 +93,8 @@ public abstract class EnemyController : MonoBehaviour //적 오브젝트를 관리하는 �
 
 	private void Update()
 	{
-		if (0.0f < giveDamageInterval && !death) //공격 빈도가 0보다 크고 죽지 않았을 때 : death 변수는 죽음 애니메이션에 관여하는데 그 애니메이션이 작동하는 동안에 플레이어가 데미지를 받으면 안됨
+		if (0.0f < giveDamageInterval && !death) //공격 빈도가 0보다 크고 죽지 않았을 때 : death 변수는 죽음 애니메이션에 관여하는데
+												 //그 애니메이션이 작동하는 동안에 플레이어가 데미지를 받으면 안됨
 		{
 			giveDamageInterval -= Time.deltaTime; //공격 빈도를 deltaTime만큼 감소
 		}

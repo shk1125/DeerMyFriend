@@ -30,7 +30,8 @@ public class EnemyBulletPoolingController : MonoBehaviour //Àû ÃÑ¾Ë ¿ÀºêÁ§Æ®ÀÇ Ç
 			enemyBulletController.Pool.Release(enemyBulletController.gameObject); //ÃÑ¾Ë ¿ÀºêÁ§Æ®µéÀº ºñÈ°¼ºÈ­ »óÅÂ·Î ´ë±â
 		}
 
-		if (bulletPoolDictionary == null) //µñ¼Å³Ê¸®°¡ »ı¼ºµÇÁö ¾Ê¾ÒÀ» °æ¿ì : ÃÑ¾ËÀ» ¿ä±¸ÇÏ´Â Àû ¿ÀºêÁ§Æ®µé¸¶´Ù °¢ÀÚ GenerateBulletPool ¸Ş¼Òµå¸¦ È£ÃâÇÏ±â ¶§¹®¿¡ µñ¼Å³Ê¸®°¡ ¾ø°Å³ª ¿©·¯¹ø »ı¼ºµÇ´Â »óÈ²À» ¹æÁöÇØ¾ß ÇÔ. ÀÎ½ºÅÏ½º¿Í ºñ½ÁÇÑ ¾Ë°í¸®Áò
+		if (bulletPoolDictionary == null) //µñ¼Å³Ê¸®°¡ »ı¼ºµÇÁö ¾Ê¾ÒÀ» °æ¿ì : ÃÑ¾ËÀ» ¿ä±¸ÇÏ´Â Àû ¿ÀºêÁ§Æ®µé¸¶´Ù °¢ÀÚ GenerateBulletPool ¸Ş¼Òµå¸¦ È£ÃâÇÏ±â ¶§¹®¿¡ µñ¼Å³Ê¸®°¡ ¾ø°Å³ª
+										  //¿©·¯¹ø »ı¼ºµÇ´Â »óÈ²À» ¹æÁöÇØ¾ß ÇÔ. Á¤Àû º¯¼ö¿Í ºñ½ÁÇÑ ¾Ë°í¸®Áò
 		{
 			bulletPoolDictionary = new Dictionary<int, IObjectPool<GameObject>>(); //µñ¼Å³Ê¸® »ı¼º
 		}

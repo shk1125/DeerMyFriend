@@ -427,11 +427,14 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 		enemyControllerList = new List<EnemyController>(); //적 컨트롤러 리스트 생성
 		for (int i = 0; i < DataHolder.stageData_Enemy.Length; i++) //스테이지에 등록된 적 오브젝트 개수 만큼
 		{
-			Transform enemyTransform = Instantiate(enemyPrefabArray[DataHolder.stageData_Enemy[i].enemyNum - 1]).transform; //적 오브젝트 생성 후 Transform 저장 : enemyNum에서 -1을 하는 이유는 json에선 1번 적이 배열상으론 0번으로 간주되기 때문
+			Transform enemyTransform = Instantiate(enemyPrefabArray[DataHolder.stageData_Enemy[i].enemyNum - 1]).transform; //적 오브젝트 생성 후 Transform 저장 :
+																															//enemyNum에서 -1을 하는 이유는 json에선
+																															//1번 적이 배열상으론 0번으로 간주되기 때문
 			enemyTransform.position = new Vector2((float)DataHolder.stageData_Enemy[i].enemyPositionX, (float)DataHolder.stageData_Enemy[i].enemyPositionY); //적 오브젝트 위치 변경
 			EnemyData enemyData = enemyDataArray[DataHolder.stageData_Enemy[i].enemyNum - 1]; //적 데이터 배열에서 1개의 요소 추출
 			EnemyController enemyController = enemyTransform.GetComponent<EnemyController>();  //적 컨트롤러 스크립트 저장
-			enemyController.SetEnemyData(enemyData.enemyHealth, enemyData.enemySpeed, enemyData.enemyDamage, enemyData.enemyBullet, enemyData.enemyBulletSpeed, enemyData.enemyScore, DataHolder.stageData_Enemy[i].enemyNum, playerController); //작 데이터 세팅 메소드 호출
+			enemyController.SetEnemyData(enemyData.enemyHealth, enemyData.enemySpeed, enemyData.enemyDamage, enemyData.enemyBullet, 
+				enemyData.enemyBulletSpeed, enemyData.enemyScore, DataHolder.stageData_Enemy[i].enemyNum, playerController); //적 데이터 세팅 메소드 호출
 			enemyControllerList.Add(enemyController); //적 컨트롤러 스크립트 리스트 추가
 		}
 
@@ -471,7 +474,8 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 		{
 			for (int i = 0; i < DataHolder.stageData_Item.Length; i++) //스테이지에 등록된 아이템 개수만큼
 			{
-				Transform itemTransform = Instantiate(itemPrefabArray[DataHolder.stageData_Item[i].itemNum - 1]).transform; //아이템 생성 후 Transform 저장 : itemNum에서 -1을 하는 이유는 json에선 1번 아이템이 배열상으론 0번으로 간주되기 때문
+				Transform itemTransform = Instantiate(itemPrefabArray[DataHolder.stageData_Item[i].itemNum - 1]).transform; //아이템 생성 후 Transform 저장 : itemNum에서 -1을 하는 이유는
+																															//json에선 1번 아이템이 배열상으론 0번으로 간주되기 때문
 				itemTransform.position = new Vector2((float)DataHolder.stageData_Item[i].itemPositionX, (float)DataHolder.stageData_Item[i].itemPositionY); //아이템 오브젝트 위치 변경
 				itemTransform.GetComponent<ItemController>().SetPlayerController(playerController); //아이템 컨트롤러 스크립트에 플레이어 등록
 				itemGameObjectList.Add(itemTransform.gameObject); //아이템 오브젝트 리스트 추가
@@ -485,7 +489,9 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 
 	private void GenerateBullets() //총알 생성 메소드
 	{
-		PlayerBulletPoolingController playerBulletPoolingController = null; //플레이어 총알 풀링 컨트롤러 스크립트 선언 : null로 초기화하는 이유는 메모리 공간을 할당하는 코드가 if문 안에 묶여있는데 스테이지 총알 생성 알고리즘에서 변수에 접근해야 하기 때문
+		PlayerBulletPoolingController playerBulletPoolingController = null; //플레이어 총알 풀링 컨트롤러 스크립트 선언 : null로 초기화하는 이유는
+																			//메모리 공간을 할당하는 코드가 if문 안에 묶여있는데 스테이지 총알 생성
+																			//알고리즘에서 변수에 접근해야 하기 때문
 
 		TextAsset playerBulletDataJson = Resources.Load<TextAsset>("Bullet/Player/playerBulletData"); //스테이지 총알 데이터 json 불러오기
 		playerBulletDataArray = JsonMapper.ToObject<PlayerBulletData[]>(playerBulletDataJson.text); //JsonMapper로 Struct 저장
@@ -495,7 +501,9 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 		playerBulletSpriteArray = new Sprite[playerBulletDataArray.Length]; //화면에 표시될 플레이어 총알 스프라이트 배열 저장
 		for (int i = 0; i < playerBulletSpriteArray.Length; i++) //화면에 표시될 플레이어 총알 스프라이트 배열 길이만큼
 		{
-			playerBulletSpriteArray[i] = Resources.Load<Sprite>(playerBulletDataArray[i].bulletSpriteLocation); //화면에 표시될 플레이어 총알 스프라이트 배열에 Resource로 준비되어 있는 스프라이트 파일 저장
+			playerBulletSpriteArray[i] = Resources.Load<Sprite>(playerBulletDataArray[i].bulletSpriteLocation); //화면에 표시될 플레이어 총알 스프라이트
+																												//배열에 Resource로 준비되어 있는
+																												//스프라이트 파일 저장
 		}
 		SetBulletImage(0); //0번 총알 이미지로 변경 메소드 호출
 
@@ -507,8 +515,10 @@ mobilePanel.SetActive(false); //모바일 패널 비활성화
 			for (int i = 0; i < DataHolder.stageData_Bullet.Length; i++) //스테이지에 등록된 총알 개수만큼
 			{
 				Transform stageBulletTransform = Instantiate(stageBulletPrefabArray[DataHolder.stageData_Bullet[i].bulletNum]).transform; //총알 생성 후 Transform 저장
-				stageBulletTransform.position = new Vector2((float)DataHolder.stageData_Bullet[i].bulletPositionX, (float)DataHolder.stageData_Bullet[i].bulletPositionY); //총알 오브젝트 위치 변경
-				stageBulletTransform.GetComponent<StageBulletController>().SetStageBulletData(DataHolder.stageData_Bullet[i].bulletNum, playerBulletPoolingController, playerController); //스테이지 총알 데이터 세팅 메소드 호출
+				stageBulletTransform.position = new Vector2((float)DataHolder.stageData_Bullet[i].bulletPositionX, 
+															(float)DataHolder.stageData_Bullet[i].bulletPositionY); //총알 오브젝트 위치 변경
+				stageBulletTransform.GetComponent<StageBulletController>().SetStageBulletData(DataHolder.stageData_Bullet[i].bulletNum, 
+																								playerBulletPoolingController, playerController); //스테이지 총알 데이터 세팅 메소드 호출
 				stageBulletGameObjectList.Add(stageBulletTransform.gameObject); //스테이지 총알 오브젝트 리스트 추가
 			}
 		}
